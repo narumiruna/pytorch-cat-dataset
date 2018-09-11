@@ -43,7 +43,7 @@ def align(image: Image, label: dict):
     y = right_eye[1] - left_eye[1]
     angle = math.degrees(math.atan2(y, x))
 
-    image = image.rotate(angle, c=c)
+    image = image.rotate(angle, center=c)
 
     # crop
     s = int(norm(left_eye, right_eye))
