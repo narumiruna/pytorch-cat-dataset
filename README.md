@@ -17,18 +17,14 @@ from dataset import CatDataset
 
 
 def main():
-    image_size = 128
-    batch_size = 64
-
     transform = transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.CenterCrop(image_size),
+        transforms.Resize(128),
         transforms.ToTensor()
     ])
 
     cat_loader = data.DataLoader(
         CatDataset('data', transform=transform),
-        batch_size=batch_size,
+        batch_size=64,
         shuffle=True)
 
     for x in cat_loader:
