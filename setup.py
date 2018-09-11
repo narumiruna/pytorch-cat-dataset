@@ -1,6 +1,11 @@
 from setuptools import setup, find_packages
 
-install_requires = ['numpy', 'torchvision', 'torch']
+install_requires = [
+    'pillow'
+    'torch',
+    'torchvision',
+    'numpy',
+]
 
 setup(
     name='cat_dataset',
