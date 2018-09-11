@@ -2,7 +2,6 @@ import glob
 import os
 from math import atan2, degrees, sqrt
 
-import numpy as np
 from PIL import Image
 from torch.utils import data
 
@@ -31,10 +30,6 @@ def distance(x, y):
     return sqrt((x[0] - y[0])**2 + (x[1] - y[1])**2)
 
 
-def center(x, y):
-    return (x[0] + y[0]) / 2, (x[1] + y[1]) / 2
-
-
 def align(image, label):
 
     left_eye = label['left_eye']
@@ -49,12 +44,12 @@ def align(image, label):
     image = image.rotate(theta, center=mouth)
 
     # crop
-    w = distance(left_eye, right_eye)
-    h = distance(mouth, center(left_eye, right_eye))
+    w = int(distance(left_eye, right_eye))
+    r = 1.4
+    u = int(w * r)
 
     image = image.crop(
-        box=(mouth[0] - int(w), mouth[1] - int(h * 2), mouth[0] + int(w),
-             mouth[1] + int(h * 0.7)))
+        box=(mouth[0] - w, mouth[1] - u, mouth[0] + w, mouth[1] + 2 * w - u))
 
     return image
 
